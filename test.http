@@ -1,0 +1,20 @@
+###
+POST https://project08.site/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+    mutation updateUser($updateUserInput: updateUserInput!){
+        updateUser(updateUserInput:$updateUserInput){
+          userId
+        }
+    }
+
+{
+    updateUserInput:{
+            "noticeTitle": "data.title",
+            "noticeContents": "data.boardContents",
+            "noticeCategory" : "data.category",
+            "url": ["www.naver.com"]
+    }
+
+}  

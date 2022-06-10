@@ -1,0 +1,35 @@
+{
+  "template": "shop-*",
+  "index_patterns": ["shop"],
+  "order": "1",
+  "settings": {
+    "refresh_interval": "5s",
+    "analysis": {
+      "analyzer": {
+        "custom_analyzer": {
+          "tokenizer": "custom_gram"
+        }
+      },
+      "tokenizer": {
+        "custom_gram": {
+          "type": "nGram",
+          "min_gram": "2",
+          "max_gram": "5"
+        }
+      }
+    },
+    "max_ngram_diff": "20"
+  },
+  "mappings": {
+    "properties": {
+      "shopproductname": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      },
+      "shopseller": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      }
+    }
+  }
+}

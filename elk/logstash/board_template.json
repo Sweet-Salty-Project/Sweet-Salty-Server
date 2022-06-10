@@ -1,0 +1,68 @@
+{
+  "template": "board-*",
+  "index_patterns": ["board"],
+  "order": "1",
+  "settings": {
+    "refresh_interval": "5s",
+    "analysis": {
+      "analyzer": {
+        "custom_analyzer": {
+          "tokenizer": "custom_gram"
+        }
+      },
+      "tokenizer": {
+        "custom_gram": {
+          "type": "nGram",
+          "min_gram": "2",
+          "max_gram": "5"
+        }
+      }
+    },
+    "max_ngram_diff": "20"
+  },
+  "mappings": {
+    "properties": {
+      "boardtitle": {
+        "type": "text",
+        "analyzer": "custom_analyzer",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
+      },
+      "boardsugar": {
+        "type": "text",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
+      },
+      "boardsalt": {
+        "type": "text",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
+      },
+      "boardcontents": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      },
+      "boardwriter": {
+        "type": "text",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
+      },
+      "agegroup": { "type": "keyword" },
+      "gender": { "type": "keyword" },
+      "createat": { "type": "date" },
+      "boardlikecount": { "type": "short" },
+      "boardhit": { "type": "long" },
+      "thumbnail": { "type": "keyword" },
+      "tags": {
+        "type": "text",
+        "fields": {
+          "keyword": { "type": "keyword" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "template": "notice-*",
+  "index_patterns": ["notice"],
+  "order": "1",
+  "settings": {
+    "refresh_interval": "5s",
+    "analysis": {
+      "analyzer": {
+        "custom_analyzer": {
+          "tokenizer": "custom_gram"
+        }
+      },
+      "tokenizer": {
+        "custom_gram": {
+          "type": "nGram",
+          "min_gram": "2",
+          "max_gram": "5"
+        }
+      }
+    },
+    "max_ngram_diff": "20"
+  },
+  "mappings": {
+    "properties": {
+      "noticetitle": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      },
+      "noticecontents": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      }
+    }
+  }
+}

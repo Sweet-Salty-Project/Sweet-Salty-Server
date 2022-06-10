@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  my-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/myfolder/src
+    ports:
+      - 3000:3000
+
+  my-database:
+    platform: linux/x86_64
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'team_project'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 3306:3306
+
+  my-redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+
+  # elasticsearch:
+  #   image: elasticsearch:7.17.0
+  #   depends_on:
+  #     - my-database
+  #   environment:
+  #     discovery.type: single-node
+  #   ports:
+  #     - 9200:9200
+
+  # logstash:
+  #   image: logstash:7.17.0
+  #   depends_on:
+  #     - elasticsearch
+  #   volumes:
+  #     - ./elk/logstash/board.conf:/usr/share/logstash/pipeline/board.conf
+  #     - ./elk/logstash/notice.conf:/usr/share/logstash/pipeline/notice.conf
+  #     - ./elk/logstash/shop.conf:/usr/share/logstash/pipeline/shop.conf
+  #     - ./elk/logstash/board_template.json:/usr/share/logstash/templates/board_template.json
+  #     - ./elk/logstash/notice_template.json:/usr/share/logstash/templates/notice_template.json
+  #     - ./elk/logstash/shop_template.json:/usr/share/logstash/templates/shop_template.json
+  #     - ./elk/logstash/mysql-connector-java-8.0.28.jar:/usr/share/logstash/mysql-connector-java-8.0.28.jar
+  #     - ./elk/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+
+  # kibana:
+  #   image: kibana:7.17.0
+  #   environment:
+  #     ELASTICSEARCH_UTL: http://elasticsearch:9200
+  #     ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+  #   ports:
+  #     - 5601:5601
