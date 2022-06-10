@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { MessageInfo } from 'src/apis/messageInfo/entities/messageInfo.entity';
+import { User } from 'src/apis/user/entities/user.entity';
 
 import {
   BaseEntity,
@@ -96,8 +97,9 @@ export class Message extends BaseEntity {
   @Field(() => MessageInfo)
   messageInfo: MessageInfo;
 
-  @Column()
-  messageOwner: string;
+  @ManyToOne((type) => User, (User) => User.messages)
+  @JoinColumn({ name: 'userId', referencedColumnName: 'userId' })
+  user: User;
 
   @CreateDateColumn()
   @Field(() => Date)

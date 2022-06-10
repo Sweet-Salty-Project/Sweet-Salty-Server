@@ -9,3 +9,5 @@
 - pipeline.id: shop
   pipeline.workers: 1
   path.config: '/usr/share/logstash/pipeline/shop.conf'
+
+

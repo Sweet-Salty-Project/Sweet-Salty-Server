@@ -433,7 +433,7 @@ export class BoardService {
             'image__data/4bf59999-9a8d-4ce4-83de-ebfde8b4df45.webp',
           sendReceived: 'RECEIVED',
           messageInfo: messageData.identifiers[0].messageInfoId,
-          messageOwner: reqBoard.user.userId,
+          user: { userId: reqBoard.user.userId },
         },
       ])
       .execute();
