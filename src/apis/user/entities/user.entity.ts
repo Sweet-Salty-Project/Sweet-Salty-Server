@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Board } from 'src/apis/board/entities/board.entity';
 import { PreferMenu } from 'src/apis/preferMenu/entities/preferMenu.entity';
+import { Message } from 'src/apis/message/entitis/message.entity';
 import {
   BaseEntity,
   Column,
@@ -72,6 +73,9 @@ export class User extends BaseEntity {
 
   @OneToMany((type) => PreferMenu, (PreferMenu) => PreferMenu.user)
   preferMenus: PreferMenu;
+
+  @OneToMany((type) => Message, (Message) => Message.user)
+  messages: Message;
 
   @Column({ default: '단짠맛집' })
   userSignUpSite: string;
