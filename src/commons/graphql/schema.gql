@@ -103,6 +103,28 @@ type Board {
   boardSides: [BoardSide!]!
 }
 
+type MessageInfo {
+  messageInfoId: String!
+  messageInfoContents: String!
+}
+
+type SendMessage {
+  messageId: String!
+  messageReceivedUser: String!
+  messageReceivedUserImage: String!
+  messageInfo: MessageInfo!
+  sendAt: DateTime!
+}
+
+type ReceivedMessage {
+  messageId: String!
+  messageSendUser: String!
+  messageSendUserImage: String!
+  messageState: Boolean!
+  messageInfo: MessageInfo!
+  sendAt: DateTime!
+}
+
 type fewUser {
   userEmail: String!
   userCreateAt: DateTime!
@@ -125,28 +147,6 @@ type User {
 
 type Token {
   accessToken: String!
-}
-
-type MessageInfo {
-  messageInfoId: String!
-  messageInfoContents: String!
-}
-
-type SendMessage {
-  messageId: String!
-  messageReceivedUser: String!
-  messageReceivedUserImage: String!
-  messageInfo: MessageInfo!
-  sendAt: DateTime!
-}
-
-type ReceivedMessage {
-  messageId: String!
-  messageSendUser: String!
-  messageSendUserImage: String!
-  messageState: Boolean!
-  messageInfo: MessageInfo!
-  sendAt: DateTime!
 }
 
 type Comment {

@@ -18,7 +18,7 @@ export class MessageService {
     if (!page) {
       return await this.messageRepository.find({
         where: {
-          messageOwner: currentUser.userId,
+          user: currentUser.userId,
           sendReceived: 'SEND',
         },
         relations: ['messageInfo'],
@@ -29,7 +29,7 @@ export class MessageService {
     } else {
       return await this.messageRepository.find({
         where: {
-          messageOwner: currentUser.userId,
+          user: currentUser.userId,
           sendReceived: 'SEND',
         },
         relations: ['messageInfo'],
@@ -43,7 +43,7 @@ export class MessageService {
   async readSend({ messageInfoId, currentUser }) {
     const result = await this.messageRepository.findOne({
       where: {
-        messageOwner: currentUser.userId,
+        user: currentUser.userId,
         sendReceived: 'SEND',
         messageInfo: messageInfoId,
       },
@@ -59,7 +59,7 @@ export class MessageService {
     return await getConnection()
       .createQueryBuilder()
       .from(Message, 'message')
-      .where({ messageOwner: currentUser.userId, sendReceived: 'SEND' })
+      .where({ user: currentUser.userId, sendReceived: 'SEND' })
       .getCount();
   }
 
@@ -68,7 +68,7 @@ export class MessageService {
     if (!page) {
       return await this.messageRepository.find({
         where: {
-          messageOwner: currentUser.userId,
+          user: currentUser.userId,
           sendReceived: 'RECEIVED',
         },
         relations: ['messageInfo'],
@@ -79,7 +79,7 @@ export class MessageService {
     } else {
       return await this.messageRepository.find({
         where: {
-          messageOwner: currentUser.userId,
+          user: currentUser.userId,
           sendReceived: 'RECEIVED',
         },
         relations: ['messageInfo'],
@@ -94,7 +94,7 @@ export class MessageService {
     return await getConnection()
       .createQueryBuilder()
       .from(Message, 'message')
-      .where('message.messageOwner = :owner', {
+      .where('message.user = :owner', {
         owner: currentUser.userId,
       })
       .andWhere('message.messageState = :state', {
@@ -109,7 +109,7 @@ export class MessageService {
   async readReceived({ messageInfoId, currentUser }) {
     const result = await this.messageRepository.findOne({
       where: {
-        messageOwner: currentUser.userId,
+        user: currentUser.userId,
         sendReceived: 'RECEIVED',
         messageInfo: messageInfoId,
       },
@@ -127,7 +127,7 @@ export class MessageService {
     return await getConnection()
       .createQueryBuilder()
       .from(Message, 'message')
-      .where({ messageOwner: currentUser.userId, sendReceived: 'RECEIVED' })
+      .where({ user: currentUser.userId, sendReceived: 'RECEIVED' })
       .getCount();
   }
 
@@ -165,7 +165,7 @@ export class MessageService {
       messageReceivedUserImage: receive.userImage,
       sendReceived: 'SEND',
       messageInfo: messageData.identifiers[0].messageInfoId,
-      messageOwner: currentUser.userId,
+      user: { userId: currentUser.userId },
     });
 
     //받은 사람 저장
@@ -174,7 +174,7 @@ export class MessageService {
       messageSendUserImage: send.userImage,
       sendReceived: 'RECEIVED',
       messageInfo: messageData.identifiers[0].messageInfoId,
-      messageOwner: receive.userId,
+      user: { userId: receive.userId },
     });
 
     return '메세지가 성공적으로 발송되었습니다.';
@@ -185,7 +185,7 @@ export class MessageService {
       .createQueryBuilder()
       .delete()
       .from(Message)
-      .where({ messageInfo: messageInfoId, messageOwner: currentUser.userId })
+      .where({ messageInfo: messageInfoId, user: currentUser.userId })
       .execute();
 
     await getConnection()
@@ -203,7 +203,7 @@ export class MessageService {
       .createQueryBuilder()
       .delete()
       .from(Message)
-      .where({ messageInfo: messageInfoId, messageOwner: currentUser.userId })
+      .where({ messageInfo: messageInfoId, user: currentUser.userId })
       .execute();
 
     await getConnection()
