@@ -1,6 +1,6 @@
 # <span style="color:orange"> 단짠맛집 </span>
 
-부크캠프 레포 URL : https://github.com/code-bootcamp/Sweet-Salty-Server
+6월 10일 전 작업 저 URL : https://github.com/code-bootcamp/Sweet-Salty-Server
 
 배포 URL : https://sweetsalty.shop
 
