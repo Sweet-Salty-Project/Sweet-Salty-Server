@@ -164,6 +164,7 @@ export class BoardService {
   }
 
   async findOne({ boardId, ip }) {
+    console.log(ip);
     const isIp = await this.cacheManager.get(ip);
 
     const qb = getConnection()
