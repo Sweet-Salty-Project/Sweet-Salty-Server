@@ -2,13 +2,13 @@ steps:
   - name: docker/compose:1.29.0
     args:
       - -f
-      - ./docker-compose.prod.yaml
+      - docker-compose.prod.yaml
       - build
 
   - name: docker/compose:1.29.0
     args:
       - -f
-      - ./docker-compose.prod.yaml
+      - docker-compose.prod.yaml
       - push
 
   - name: gcr.io/cloud-builders/kubectl
@@ -19,4 +19,4 @@ steps:
       - team-sha256-1=asia.gcr.io/evocative-tube-352516/team:2.5.0
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
-      - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-02-1
+      - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1
