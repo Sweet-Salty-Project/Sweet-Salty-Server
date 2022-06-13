@@ -50,6 +50,8 @@ export class AuthController {
     const uuid = req.url.split('/')[2];
 
     await this.authService.updateWhiteList({ uuid });
+
+    res.send('<script>window.close();</script > ');
   }
 
   @Get('/login/kakao')

@@ -250,7 +250,7 @@ export class AuthService {
       .post(
         `https://api-sms.cloud.toast.com/sms/v3.0/appKeys/${process.env.SMS_APP_KEY}/sender/sms`,
         {
-          body: `본인확인 URL : http://projest08.site/users/${uuid} `,
+          body: `본인확인 URL : https://project08.site/users/${uuid} `,
           sendNo: process.env.SMS_SENDER,
           recipientList: [
             {
