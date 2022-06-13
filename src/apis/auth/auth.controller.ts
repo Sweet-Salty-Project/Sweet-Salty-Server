@@ -41,6 +41,17 @@ export class AuthController {
     // }
   }
 
+  @Get('users/:uuid')
+  async isUser(
+    //
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const uuid = req.url.split('/')[2];
+
+    await this.authService.updateWhiteList({ uuid });
+  }
+
   @Get('/login/kakao')
   @UseGuards(AuthGuard('kakao'))
   async loginKakao(

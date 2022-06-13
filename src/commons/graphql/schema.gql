@@ -125,6 +125,10 @@ type ReceivedMessage {
   sendAt: DateTime!
 }
 
+type Token {
+  accessToken: String!
+}
+
 type fewUser {
   userEmail: String!
   userCreateAt: DateTime!
@@ -143,10 +147,6 @@ type User {
   gender: String!
   createAt: DateTime!
   updateAt: DateTime!
-}
-
-type Token {
-  accessToken: String!
 }
 
 type Comment {

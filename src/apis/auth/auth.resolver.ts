@@ -7,10 +7,14 @@ import {
 } from 'src/commons/auth/gql-auth.guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-user-param';
 import { Token } from './entities/auth.entity';
+import { AuthController } from './auth.controller';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly authController: AuthController,
+  ) {}
 
   @Mutation(() => Token)
   async login(
@@ -18,7 +22,10 @@ export class AuthResolver {
     @Args('userPassword') userPassword: string,
     @Context() context: any,
   ) {
+    const ipData = context.req.clientIp;
+    // console.log(context.req.device.parser.get_type);
     const user = await this.authService.isUser({ userEmail, userPassword });
+    await this.authService.whiteList({ ipData, user });
 
     await this.authService.setRefreshToken({ user, res: context.res });
 
@@ -33,6 +40,11 @@ export class AuthResolver {
   ) {
     return this.authService.getAccessToken({ user: currentUser });
   }
+
+  // @Query(() => String)
+  // async data(@Args('phone') phone: string) {
+  //   this.authService.sendUserCheck({ phone });
+  // }
 
   @Mutation(() => String)
   async logout(

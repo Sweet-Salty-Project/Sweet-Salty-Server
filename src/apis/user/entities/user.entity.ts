@@ -12,6 +12,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { whiteList } from 'src/apis/auth/entities/auth.entity';
 
 @ObjectType()
 export class fewUser {
@@ -76,6 +77,9 @@ export class User extends BaseEntity {
 
   @OneToMany((type) => Message, (Message) => Message.user)
   messages: Message;
+
+  @OneToMany((type) => whiteList, (whiteList) => whiteList.user)
+  whiteLists: whiteList;
 
   @Column({ default: '단짠맛집' })
   userSignUpSite: string;

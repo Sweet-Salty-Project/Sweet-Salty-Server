@@ -47,6 +47,7 @@
     "cache-manager-redis-store": "^2.0.0",
     "cookie-parser": "^1.4.6",
     "csurf": "^1.11.0",
+    "express-device": "^0.4.2",
     "express-formidable": "^1.2.0",
     "express-rate-limit": "^6.4.0",
     "express-session": "^1.17.3",
