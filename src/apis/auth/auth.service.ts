@@ -9,10 +9,12 @@ import { HttpService } from '@nestjs/axios';
 import { Cache } from 'cache-manager';
 import { CACHE_MANAGER, Inject } from '@nestjs/common';
 import { User } from '../user/entities/user.entity';
+import { whiteList } from './entities/auth.entity';
 import { getConnection, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +28,8 @@ export class AuthService {
     private readonly httpService: HttpService,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(whiteList)
+    private readonly whiteListRepository: Repository<whiteList>,
   ) {}
 
   async isUser({ userEmail, userPassword }) {
@@ -49,6 +53,45 @@ export class AuthService {
       );
 
     return user;
+  }
+
+  async whiteList({ user, ipData }) {
+    const ip = await this.whiteListRepository.findOne({
+      where: { user: user },
+    });
+
+    if (!ip) {
+      await this.whiteListRepository.save({
+        ip: ipData,
+        user,
+      });
+    }
+
+    const isWhiteList = await this.whiteListRepository.findOne({
+      where: {
+        user: user,
+        ip: ipData,
+      },
+    });
+    if (!isWhiteList) {
+      const uuid = uuidv4();
+      await this.cacheManager.set(uuid, user.userId + '|' + ipData, {
+        ttl: 360,
+      });
+      this.sendUserCheck({ phone: user.userPhone, uuid });
+
+      throw new UnauthorizedException();
+    }
+  }
+
+  async updateWhiteList({ uuid }) {
+    const data: string = await this.cacheManager.get(uuid);
+    const userId = data.split('|')[0];
+    const ip = data.split('|')[1];
+
+    const user = await this.userRepository.findOne({ userId });
+
+    await this.whiteListRepository.save({ ip, user });
   }
 
   async blackList({ context }) {
@@ -200,6 +243,29 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  async sendUserCheck({ phone, uuid }) {
+    const data = await this.httpService
+      .post(
+        `https://api-sms.cloud.toast.com/sms/v3.0/appKeys/${process.env.SMS_APP_KEY}/sender/sms`,
+        {
+          body: `본인확인 URL : http://projest08.site/users/${uuid} `,
+          sendNo: process.env.SMS_SENDER,
+          recipientList: [
+            {
+              internationalRecipientNo: phone,
+            },
+          ],
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'X-Secret-Key': process.env.SMS_X_SECRET_KEY,
+          },
+        },
+      )
+      .toPromise();
   }
 }
 

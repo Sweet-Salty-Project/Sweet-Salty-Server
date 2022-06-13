@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { APP_PIPE, NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { getConnection } from 'typeorm';
@@ -9,6 +9,8 @@ import * as csurf from 'csurf';
 import Helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 import * as requestIp from 'request-ip';
+
+const device = require('express-device');
 
 import { Database, Resource } from '@admin-bro/typeorm';
 
@@ -48,6 +50,8 @@ async function bootstrap() {
   app.setViewEngine('ejs');
   app.use(json());
   app.use(requestIp.mw());
+  app.use(device.capture());
+
   AdminBro.registerAdapter({ Database, Resource });
 
   const adminBro = new AdminBro({
@@ -145,6 +149,6 @@ async function bootstrap() {
     credentials: true,
   });
 
-  await app.listen(3000);
+  await app.listen(3000, '0.0.0.0');
 }
 bootstrap();

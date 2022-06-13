@@ -25,8 +25,8 @@ export class ImageService {
   ) {}
   async upload({ file }: IFile) {
     const storage = new Storage({
-      //      keyFilename: this.config.get('STORAGE_KEY_FILENAME')
-      keyFilename: '/my-secret/gcp.image.json',
+      keyFilename: this.config.get('STORAGE_KEY_FILENAME'),
+      //   keyFilename: '/my-secret/gcp.image.json',
       projectId: this.config.get('STORAGE_PROJECT_ID'),
     }).bucket(this.config.get('STORAGE_BUCKET'));
 
