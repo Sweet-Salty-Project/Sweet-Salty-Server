@@ -84,7 +84,7 @@ export class AuthService {
     }
   }
 
-  async updateWhiteList({ uuid }) {
+  async updateWhiteList({ uuid, res }) {
     const data: string = await this.cacheManager.get(uuid);
     const userId = data.split('|')[0];
     const ip = data.split('|')[1];
@@ -92,6 +92,8 @@ export class AuthService {
     const user = await this.userRepository.findOne({ userId });
 
     await this.whiteListRepository.save({ ip, user });
+
+    res.send('<script>window.close();</script > ');
   }
 
   async blackList({ context }) {
@@ -246,7 +248,7 @@ export class AuthService {
   }
 
   async sendUserCheck({ phone, uuid }) {
-    const data = await this.httpService
+    await this.httpService
       .post(
         `https://api-sms.cloud.toast.com/sms/v3.0/appKeys/${process.env.SMS_APP_KEY}/sender/sms`,
         {
