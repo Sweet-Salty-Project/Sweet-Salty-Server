@@ -8,6 +8,7 @@ import {
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-user-param';
 import { Token } from './entities/auth.entity';
 import { AuthController } from './auth.controller';
+import * as macAddress from 'macaddress';
 
 @Resolver()
 export class AuthResolver {
@@ -23,6 +24,9 @@ export class AuthResolver {
     @Context() context: any,
   ) {
     const ipData = context.req.clientIp;
+    // macAddress.all().then(function (all) {
+    //   console.log(JSON.stringify(all, null, 2));
+    // });
     // console.log(context.req.device.parser.get_type);
     const user = await this.authService.isUser({ userEmail, userPassword });
     await this.authService.whiteList({ ipData, user });
