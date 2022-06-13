@@ -21,8 +21,7 @@ export class FollowResolver {
   @Query(() => [String])
   async followCount(
     @CurrentUser() followingUserId: ICurrentUser, //
-    @Args('followerNickname') followerNickname: string,
   ) {
-    return this.followService.count({ followingUserId, followerNickname });
+    return this.followService.count({followingUserId})
   }
 }
