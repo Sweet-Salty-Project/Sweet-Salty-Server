@@ -20,4 +20,7 @@ X-REQUEST-TYPE: GraphQL
 }  
 
 ###
-GET http://localhost:3000/users/asdasd
+http://localhost:3000/users/09bcd934-5c70-4d1f-925a-9c2d94c17b94
+
+###
+http://localhost:3000/uesrs/014f78b0-56a1-4e0c-be28-d0f3d0161753
