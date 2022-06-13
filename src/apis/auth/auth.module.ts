@@ -12,12 +12,12 @@ import { AuthController } from './auth.controller';
 import { UserService } from '../user/user.service';
 import { JwtKakaoStrategy } from 'src/commons/auth/jwt-social-kakao.strategy';
 import { JwtNaverStrategy } from 'src/commons/auth/jwt-social-naver.strategy';
+import { whiteList } from './entities/auth.entity';
 
 @Module({
   imports: [
-    //
     JwtModule.register({}),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, whiteList]),
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
@@ -35,6 +35,7 @@ import { JwtNaverStrategy } from 'src/commons/auth/jwt-social-naver.strategy';
     JwtKakaoStrategy,
     JwtNaverStrategy,
     UserService,
+    AuthController,
   ],
 })
 export class AuthModule {}
