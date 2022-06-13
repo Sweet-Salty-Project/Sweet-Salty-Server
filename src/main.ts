@@ -1,4 +1,4 @@
-import { APP_PIPE, NestFactory } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { getConnection } from 'typeorm';
@@ -16,9 +16,6 @@ import { Database, Resource } from '@admin-bro/typeorm';
 
 const AdminBroExpress = require('@admin-bro/express');
 import AdminBro from 'admin-bro';
-
-//const AdminBro = require('admin-bro');
-//import AdminBroExpress from '@admin-bro/express';
 
 import { HttpExceptionFilter } from './commons/filter/http-exception.filter';
 import { User } from './apis/user/entities/user.entity';

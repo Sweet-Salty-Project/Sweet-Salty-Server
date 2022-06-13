@@ -75,19 +75,19 @@ export class AuthService {
     });
     if (!isWhiteList) {
       const uuid = uuidv4();
-      await this.cacheManager.set(uuid, user.userId + '|' + ipData, {
+      await this.cacheManager.set(uuid, user.userId + '/' + ipData, {
         ttl: 360,
       });
       this.sendUserCheck({ phone: user.userPhone, uuid });
 
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('등록되지 않은 IP입니다.');
     }
   }
 
   async updateWhiteList({ uuid, res }) {
     const data: string = await this.cacheManager.get(uuid);
-    const userId = data.split('|')[0];
-    const ip = data.split('|')[1];
+    const userId = data.split('/')[0];
+    const ip = data.split('/')[1];
 
     const user = await this.userRepository.findOne({ userId });
 
