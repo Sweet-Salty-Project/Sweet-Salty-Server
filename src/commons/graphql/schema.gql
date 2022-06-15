@@ -189,6 +189,7 @@ enum POINT_TRANSACTION_STATUS_ENUM {
 
 type Query {
   fetchTags(refName: String!): [BoardTag!]!
+  fetchComputers: String!
   fetchBoardTitle(title: String!): JSONObject!
   fetchBoardContents(contents: String!): JSONObject!
   fetchBoardWithTags(tags: [String!]!): JSONObject!
@@ -262,6 +263,9 @@ type Mutation {
   createTopCategory: String!
   createSubCategory: String!
   login(userEmail: String!, userPassword: String!): Token!
+  createComputer(name: String!): String!
+  updateComputer(name: String!): String!
+  deleteComputer: String!
   restoreAccessToken: Token!
   logout: String!
   overlapEmail(email: String!): Boolean!
