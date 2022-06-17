@@ -431,7 +431,7 @@ export class BoardService {
         {
           messageSendUser: '단짠맛집',
           messageSendUserImage:
-            'image__data/4bf59999-9a8d-4ce4-83de-ebfde8b4df45.webp',
+            'img_bucke/4a97ba1c-0b74-4fee-9224-85c379e2f9b2.webp',
           sendReceived: 'RECEIVED',
           messageInfo: messageData.identifiers[0].messageInfoId,
           user: { userId: reqBoard.user.userId },
