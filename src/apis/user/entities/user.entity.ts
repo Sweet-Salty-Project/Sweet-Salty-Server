@@ -9,6 +9,7 @@ import {
   DeleteDateColumn,
   Entity,
   OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -45,7 +46,7 @@ export class User extends BaseEntity {
   @Field(() => String)
   userNickname: string;
 
-  @Column({ default: 'image__data/f81517a2-c910-4cc2-8fbd-4d263f222a71.webp' })
+  @Column({ default: 'img_bucke/80560f88-0b79-4d64-bd2e-adb8e0999fed.webp' })
   @Field(() => String)
   userImage: string;
 

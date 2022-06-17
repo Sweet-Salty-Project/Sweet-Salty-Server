@@ -28,17 +28,6 @@ export class AuthController {
     @Res() res: Response,
   ) {
     this.socialLogin({ req, res });
-    // const user = await this.userService.findCheck({
-    //   userEmail: req.user.userEmail,
-    //   userSignUpSite: req.user.userSignUpSite,
-    // });
-
-    // if (user) {
-    //   this.authService.social_login({ user, res });
-    // } else {
-    //   const newUser = await this.userService.socialCreate({ user: req.user });
-    //   this.authService.social_login({ user: newUser, res });
-    // }
   }
 
   @Get('users/:uuid')

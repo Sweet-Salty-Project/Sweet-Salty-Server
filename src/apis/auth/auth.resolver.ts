@@ -36,6 +36,47 @@ export class AuthResolver {
     return await this.authService.getAccessToken({ user });
   }
 
+  @UseGuards(GqlAuthAccessGuard)
+  @Mutation(() => String)
+  async createComputer(
+    @Args('name') name: string,
+    @CurrentUser() currentUser: ICurrentUser,
+    @Context() context: any,
+  ) {
+    const deviceType = context.req.device.type;
+    const ip = context.req.clientIp;
+
+    console.log(ip, deviceType);
+  }
+
+  @UseGuards(GqlAuthAccessGuard)
+  @Mutation(() => String)
+  async updateComputer(
+    @Args('name') name: string,
+    @CurrentUser() currentUser: ICurrentUser,
+    @Context() context: any,
+  ) {
+    return;
+  }
+
+  @UseGuards(GqlAuthAccessGuard)
+  @Query(() => String)
+  async fetchComputers(
+    //
+    @CurrentUser() currentUser: ICurrentUser,
+  ) {
+    return;
+  }
+
+  @UseGuards(GqlAuthAccessGuard)
+  @Mutation(() => String)
+  async deleteComputer(
+    @CurrentUser() currentUser: ICurrentUser,
+    @Context() context: any,
+  ) {
+    return;
+  }
+
   @UseGuards(GqlAuthRefreshGuard)
   @Mutation(() => Token)
   async restoreAccessToken(
