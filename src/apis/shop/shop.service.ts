@@ -17,6 +17,7 @@ import { Image } from '../image/entities/image.entity';
 import { ImageService } from '../image/image.service';
 import { PaymentHistory } from '../paymentHistory/entities/paymentHistory.entity';
 import { Place } from '../place/entities/place.entity';
+import { UpdateUserInput } from '../user/dto/updateUser.input';
 import { User } from '../user/entities/user.entity';
 import { Shop } from './entities/shop.entity';
 @Injectable()
@@ -245,11 +246,16 @@ export class ShopService {
     const shopInfo = await this.shopRepository.findOne({
       where: { shopId },
     });
+
+    console.log(shopInfo)
+    // await this.placeRepository.findOne({
+    //   where: {  }
+    // })
     if (adminCheck.userState) {
       if (shopInfo) {
         const newShop = {
           ...shopInfo,
-          ...updateShopInput,
+          
         };
         return await this.shopRepository.save(newShop);
       }

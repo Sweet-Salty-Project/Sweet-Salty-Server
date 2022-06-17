@@ -47,12 +47,9 @@ export class FollowService {
     return `팔로우`;
   }
 
-  async count({ followingUserId }) {
-
-    console.log(followingUserId)
-
+  async count({ followingUserId, followerNickname }) {
     const checkNickname = await this.userRepository.findOne({
-      userId : followingUserId.userId
+      userNickname: followerNickname,
     });
 
     const followerCount = await this.followRepository.findAndCount({

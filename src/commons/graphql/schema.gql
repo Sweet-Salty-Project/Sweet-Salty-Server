@@ -315,11 +315,11 @@ input CreateBoardInput {
 }
 
 input PlaceInput {
-  placeName: String!
-  placeAddress: String!
-  placeUrl: String!
-  lat: String!
-  lng: String!
+  placeName: String
+  placeAddress: String
+  placeUrl: String
+  lat: String
+  lng: String
 }
 
 input CreateBoardReqInput {
@@ -409,4 +409,5 @@ input updateShopInput {
   shopDescription: String
   shopStock: Int
   shopUrl: String
+  place: PlaceInput
 }

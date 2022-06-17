@@ -1,4 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
+import { PlaceInput } from 'src/apis/board/dto/createBoard.input';
 
 @InputType()
 export class updateShopInput {
@@ -25,4 +26,7 @@ export class updateShopInput {
 
   @Field(() => String, { nullable: true })
   shopUrl: string;
+
+  @Field(() => PlaceInput, {nullable: true} )
+  place: { PlaceInput: string };
 }
