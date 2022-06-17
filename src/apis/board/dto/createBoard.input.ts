@@ -42,18 +42,18 @@ export class CreateBoardReqInput {
 
 @InputType()
 export class PlaceInput {
-  @Field(() => String)
+  @Field(() => String, {nullable: true})
   placeName: string;
 
-  @Field(() => String)
+  @Field(() => String, {nullable: true})
   placeAddress: string;
 
-  @Field(() => String)
+  @Field(() => String, {nullable: true})
   placeUrl: string;
 
-  @Field(() => String)
+  @Field(() => String, {nullable: true})
   lat: string;
 
-  @Field(() => String)
+  @Field(() => String, {nullable: true})
   lng: string;
 }
