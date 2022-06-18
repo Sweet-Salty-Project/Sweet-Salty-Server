@@ -205,7 +205,7 @@ type Query {
   searchBoard(tags: [String!]!, category: BOARD_SUB_CATEGORY_NAME_ENUM): [String!]!
   test(file: Upload!): String!
   getBarcode: String!
-  followCount(followerNickname: String!): [String!]!
+  followCount: [String!]!
   fetchUser(userEmail: String, userId: String, userNickname: String): User!
   findUserId(phone: String!): fewUser!
   fetchUserNickname(userNickname: String!): User!
@@ -319,11 +319,11 @@ input CreateBoardInput {
 }
 
 input PlaceInput {
-  placeName: String!
-  placeAddress: String!
-  placeUrl: String!
-  lat: String!
-  lng: String!
+  placeName: String
+  placeAddress: String
+  placeUrl: String
+  lat: String
+  lng: String
 }
 
 input CreateBoardReqInput {
@@ -413,4 +413,5 @@ input updateShopInput {
   shopDescription: String
   shopStock: Int
   shopUrl: String
+  place: PlaceInput
 }
