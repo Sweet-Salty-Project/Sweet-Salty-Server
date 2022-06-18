@@ -6,8 +6,8 @@ import { Strategy, Profile } from 'passport-naver-v2';
 export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
   constructor() {
     super({
-      clientID: process.env.NAVER_CLIENTID,
-      clientSecret: process.env.NAVER_CLIENTSECRET,
+      clientID: process.env.NAVER_CLIENT_ID,
+      clientSecret: process.env.NAVER_CLIENT_SECRET,
       callbackURL: process.env.NAVER_CALLBACK_URL,
       scope: ['email', 'profile', 'name'],
     });
