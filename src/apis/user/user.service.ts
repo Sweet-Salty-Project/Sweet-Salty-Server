@@ -166,6 +166,7 @@ export class UserService {
   async update({ userEmail, updateUserInput }) {
     const { prefer, ...update } = updateUserInput;
     const user = await this.UserRepository.findOne({ where: { userEmail } });
+    user.userPassword = await bcrypt.hash(updateUserInput.userPassword, 10);
     const updateData = {
       ...user,
       ...update,

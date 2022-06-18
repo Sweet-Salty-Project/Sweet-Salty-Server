@@ -39,7 +39,7 @@ export class ImageService {
     //     contentType: 'application/octet-stream',
     //   });
 
-    const url = await new Promise((resolve, reject) => {
+    const url = new Promise((resolve, reject) => {
       const uuid = uuidv4();
       file
         .createReadStream()
