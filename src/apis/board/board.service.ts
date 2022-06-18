@@ -535,7 +535,7 @@ export class BoardService {
   async delete({ boardId, currentUser }) {
     const userData = await getConnection()
       .createQueryBuilder()
-      .select('user.userId')
+      .select(['user.userId', 'user.userState'])
       .from(User, 'user')
       .where({ userId: currentUser.userId })
       .getOne();
