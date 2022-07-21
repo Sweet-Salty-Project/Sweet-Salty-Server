@@ -3,6 +3,7 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLJSONObject } from 'graphql-type-json';
 import { GqlAuthAccessGuard } from 'src/commons/auth/gql-auth.guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-user-param';
+import { AuthController } from '../auth/auth.controller';
 import { BoardService } from './board.service';
 import { CreateBoardInput, CreateBoardReqInput } from './dto/createBoard.input';
 import { UpdateBoardInput } from './dto/updateBoard.input';

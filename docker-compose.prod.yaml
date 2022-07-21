@@ -3,7 +3,7 @@ version: '3.3'
 services:
   my-backend:
     platform: linux/x86_64
-    image: asia.gcr.io/evocative-tube-352516/team:3.0.3
+    image: asia.gcr.io/evocative-tube-352516/team:3.0.5
     build:
       context: .
       dockerfile: Dockerfile
