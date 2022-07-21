@@ -48,7 +48,10 @@ export class UserResolver {
   //
   @UseGuards(GqlAuthAccessGuard)
   @Query(() => User)
-  fetchUserLoggedIn(@CurrentUser() currentUser: ICurrentUser) {
+  fetchUserLoggedIn(
+    //
+    @CurrentUser() currentUser: ICurrentUser,
+  ) {
     return this.userService.findLoggedIn({ currentUser });
   }
 

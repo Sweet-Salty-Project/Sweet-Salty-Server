@@ -16,7 +16,7 @@ steps:
       - set
       - image
       - deployment/snsteam-backend-api-resource
-      - team-sha256-1=asia.gcr.io/evocative-tube-352516/team:3.0.3
+      - team-sha256-1=asia.gcr.io/evocative-tube-352516/team:3.0.5
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
       - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1
