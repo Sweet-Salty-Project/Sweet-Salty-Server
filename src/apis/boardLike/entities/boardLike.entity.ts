@@ -13,17 +13,17 @@ import {
 
 @ObjectType()
 @Entity()
-@Index(['fk_post_id', 'fk_user_id'], { unique: true })
+//@Index(['fk_post_id', 'fk_user_id'], { unique: true })
 export class BoardLike extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
   boardLikeCountId: string;
 
-  @Column('uuid')
-  fk_user_id!: string;
+  // @Column('uuid')
+  // fk_user_id!: string;
 
-  @Column('uuid')
-  fk_post_id!: string;
+  // @Column('uuid')
+  // fk_post_id!: string;
 
   @ManyToOne((type) => Board, (Board) => Board.boardLikes)
   @JoinColumn({ name: 'fk_post_id' })
