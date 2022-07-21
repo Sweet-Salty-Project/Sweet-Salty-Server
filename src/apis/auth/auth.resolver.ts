@@ -49,6 +49,8 @@ export class AuthResolver {
     console.log(ip, deviceType);
   }
 
+  // 8자리의 숫자로 구성된 난수 생성
+
   @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => String)
   async updateComputer(

@@ -23,19 +23,17 @@ import { whiteList } from './entities/auth.entity';
       maxRedirects: 5,
     }),
   ],
-  controllers: [AuthController],
+  //controllers: [AuthController],
   providers: [
-    //
-
     JwtRefreshStrategy,
     JwtAccessStrategy,
     AuthResolver,
     AuthService,
+    UserService,
+    AuthController,
     JwtGoogleStrategy,
     JwtKakaoStrategy,
     JwtNaverStrategy,
-    UserService,
-    AuthController,
   ],
 })
 export class AuthModule {}

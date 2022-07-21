@@ -14,6 +14,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { whiteList } from 'src/apis/auth/entities/auth.entity';
+import { BoardLike } from 'src/apis/boardLike/entities/boardLike.entity';
 
 @ObjectType()
 export class fewUser {
@@ -81,6 +82,9 @@ export class User extends BaseEntity {
 
   @OneToMany((type) => whiteList, (whiteList) => whiteList.user)
   whiteLists: whiteList;
+
+  @OneToMany((type) => BoardLike, (BoardLike) => BoardLike.user)
+  boardLikes: BoardLike;
 
   @Column({ default: '단짠맛집' })
   userSignUpSite: string;

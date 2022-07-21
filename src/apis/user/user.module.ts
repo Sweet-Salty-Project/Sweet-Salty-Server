@@ -12,8 +12,8 @@ import { UserService } from './user.service';
     //
     UserResolver,
     UserService,
-    JwtAccessStrategy,
-    JwtRefreshStrategy,
+    //JwtAccessStrategy,
+    //JwtRefreshStrategy,
   ],
 })
 export class UserModule {}
